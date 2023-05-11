@@ -1,0 +1,6 @@
+import search from "../../public/Search.svg";
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  search,
+};
