@@ -1,0 +1,850 @@
+{
+  "StyledLayerDescriptor": {
+    "NamedLayer": {
+      "Name": "LGA",
+      "UserStyle": {
+        "Name": "LGA",
+        "FeatureTypeStyle": {
+          "Rule": [
+            {
+              "Name": "BANYULE",
+              "Description": {
+                "Title": "BANYULE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "BANYULE"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#eb64be"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "BAYSIDE",
+              "Description": {
+                "Title": "BAYSIDE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "BAYSIDE"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#63d8dc"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "BOROONDARA",
+              "Description": {
+                "Title": "BOROONDARA"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "BOROONDARA"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#b93ad9"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "BRIMBANK",
+              "Description": {
+                "Title": "BRIMBANK"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "BRIMBANK"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#cdc87c"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "CARDINIA",
+              "Description": {
+                "Title": "CARDINIA"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "CARDINIA"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#b4ed22"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "CASEY",
+              "Description": {
+                "Title": "CASEY"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "CASEY"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#e59159"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "DAREBIN",
+              "Description": {
+                "Title": "DAREBIN"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "DAREBIN"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#e254cd"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "FRANKSTON",
+              "Description": {
+                "Title": "FRANKSTON"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "FRANKSTON"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#7ceab5"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "GLEN EIRA",
+              "Description": {
+                "Title": "GLEN EIRA"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "GLEN EIRA"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#80e0a0"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "GREATER DANDENONG",
+              "Description": {
+                "Title": "GREATER DANDENONG"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "GREATER DANDENONG"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#c689e9"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "HOBSONS BAY",
+              "Description": {
+                "Title": "HOBSONS BAY"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "HOBSONS BAY"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#3dea3a"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "HUME",
+              "Description": {
+                "Title": "HUME"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "HUME"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#69b1e1"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "KINGSTON",
+              "Description": {
+                "Title": "KINGSTON"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "KINGSTON"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#8aea53"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "KNOX",
+              "Description": {
+                "Title": "KNOX"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "KNOX"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#39dba8"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MANNINGHAM",
+              "Description": {
+                "Title": "MANNINGHAM"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MANNINGHAM"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#e72f29"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MARIBYRNONG",
+              "Description": {
+                "Title": "MARIBYRNONG"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MARIBYRNONG"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#26cc42"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MAROONDAH",
+              "Description": {
+                "Title": "MAROONDAH"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MAROONDAH"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#210ec9"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MELBOURNE",
+              "Description": {
+                "Title": "MELBOURNE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MELBOURNE"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#cf5b80"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MELTON",
+              "Description": {
+                "Title": "MELTON"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MELTON"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#deb171"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MERRI-BEK",
+              "Description": {
+                "Title": "MERRI-BEK"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MERRI-BEK"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#d06e53"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MITCHELL",
+              "Description": {
+                "Title": "MITCHELL"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MITCHELL"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#36e50e"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MONASH",
+              "Description": {
+                "Title": "MONASH"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MONASH"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#c0d21b"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MOONEE VALLEY",
+              "Description": {
+                "Title": "MOONEE VALLEY"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MOONEE VALLEY"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#28e2c9"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MORNINGTON PENINSULA",
+              "Description": {
+                "Title": "MORNINGTON PENINSULA"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MORNINGTON PENINSULA"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#db5fdd"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "MURRINDINDI",
+              "Description": {
+                "Title": "MURRINDINDI"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "MURRINDINDI"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#dab33f"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "NILLUMBIK",
+              "Description": {
+                "Title": "NILLUMBIK"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "NILLUMBIK"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#4f77ee"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "PORT PHILLIP",
+              "Description": {
+                "Title": "PORT PHILLIP"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "PORT PHILLIP"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#96dc41"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "STONNINGTON",
+              "Description": {
+                "Title": "STONNINGTON"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "STONNINGTON"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#f057a3"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "WHITEHORSE",
+              "Description": {
+                "Title": "WHITEHORSE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "WHITEHORSE"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#1bbbe7"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "WHITTLESEA",
+              "Description": {
+                "Title": "WHITTLESEA"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "WHITTLESEA"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#a061ed"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "WYNDHAM",
+              "Description": {
+                "Title": "WYNDHAM"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "WYNDHAM"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#896ed2"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "YARRA",
+              "Description": {
+                "Title": "YARRA"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "YARRA"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#1d79f0"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "YARRA RANGES",
+              "Description": {
+                "Title": "YARRA RANGES"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "lga_name",
+                  "Literal": "YARRA RANGES"
+                }
+              },
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#d46c7c"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "",
+              "Description": {
+                "Title": "lga_name is ''"
+              },
+              "ElseFilter": "",
+              "PolygonSymbolizer": {
+                "Fill": {
+                  "SvgParameter": "#4653e5"
+                },
+                "Stroke": {
+                  "SvgParameter": [
+                    "#232323",
+                    1,
+                    "bevel"
+                  ]
+                }
+              }
+            },
+            {
+              "TextSymbolizer": {
+                "Label": {
+                  "PropertyName": "lga_name"
+                },
+                "Font": {
+                  "SvgParameter": [
+                    "Open Sans",
+                    13
+                  ]
+                },
+                "LabelPlacement": {
+                  "PointPlacement": {
+                    "AnchorPoint": {
+                      "AnchorPointX": 0,
+                      "AnchorPointY": 0.5
+                    }
+                  }
+                },
+                "Fill": {
+                  "SvgParameter": "#323232"
+                },
+                "VendorOption": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
