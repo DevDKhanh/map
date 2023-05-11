@@ -46,7 +46,7 @@ function Loading({ loading }: PropsLoading) {
               <div></div>
               <div></div>
             </div>
-            <p className={styles.text}>Đang tải thời khoá biểu...</p>
+            <p className={styles.text}>Đang tải dữ liệu...</p>
           </div>
         </Portal>
       ) : null}

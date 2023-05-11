@@ -1,22 +1,29 @@
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+// import "proj4leaflet";
+// import "proj4";
 
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { useEffect, useState } from "react";
+
+import { CRS } from "leaflet";
+import L from "leaflet";
+import MapDataRender from "../MapDataRender";
 import { PropsMap } from "./interfaces";
-import styles from "./Map.module.scss";
 
 function MapClient({}: PropsMap) {
   return (
     <MapContainer
-      center={[9.975896274502997, 105.77857732772829]}
+      center={[17, 108]}
       zoom={6}
       scrollWheelZoom={true}
       style={{
-        height: "100vh",
+        height: "100%",
         width: "100%",
         position: "absolute",
       }}
+      // crs={CRS.EPSG3395}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={[51.505, -0.09]} />
+      <MapDataRender />
     </MapContainer>
   );
 }
