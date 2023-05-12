@@ -102,8 +102,6 @@ function MainHome({}: PropsMainHome) {
                     className={styles.item}
                     key={i}
                     onClick={() => {
-                      console.log(v.geometry.coordinates?.[0]?.[0]?.[0]);
-
                       // dispatch(setCenterMap([10.35527, 106.107159]));
                       dispatch(
                         setCenterMap([
