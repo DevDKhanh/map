@@ -34,7 +34,7 @@ function MainHome({}: PropsMainHome) {
     }
 
     const admindata = data.melbourneadmin.features.filter((x: any) =>
-      removeVietnameseTones(`${x?.properties?.name}`).includes(
+      removeVietnameseTones(`${x?.properties?.LGA_NAME}`).includes(
         removeVietnameseTones(debounce.trim())
       )
     );
@@ -102,12 +102,19 @@ function MainHome({}: PropsMainHome) {
                     className={styles.item}
                     key={i}
                     onClick={() => {
-                      dispatch(setCenterMap([10.35527, 106.107159]));
-                      // dispatch(setCenterMap(v.geometry.coordinates?.[0]?.[0]))
+                      console.log(v.geometry.coordinates?.[0]?.[0]?.[0]);
+
+                      // dispatch(setCenterMap([10.35527, 106.107159]));
+                      dispatch(
+                        setCenterMap([
+                          v.geometry.coordinates?.[0]?.[0]?.[0][1],
+                          v.geometry.coordinates?.[0]?.[0]?.[0][0],
+                        ])
+                      );
                     }}
                   >
                     <p>
-                      Name: {v.properties?.name || v.properties?.local_name}
+                      Name: {v.properties?.LGA_NAME || v.properties?.local_name}
                     </p>
                     <p>PFI: {v.properties?.PFI}</p>
                     <p>UFI_CR: {v.properties?.UFI_CR}:</p>
