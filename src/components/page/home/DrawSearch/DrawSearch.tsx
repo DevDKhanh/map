@@ -33,7 +33,9 @@ function DrawSearch({}: PropsDrawSearch) {
       >
         <BsTrashFill />
       </div>
-      <Tippy content={isDraw ? "Tắt chế độ vẽ" : "Bật chế độ vẽ"}>
+      <Tippy
+        content={isDraw ? "Turn off drawing mode" : "Turn on drawing mode"}
+      >
         <div
           className={clsx(styles.option, { [styles.active]: isDraw })}
           onClick={() => {

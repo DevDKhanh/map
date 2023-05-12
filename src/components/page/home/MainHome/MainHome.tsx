@@ -1,3 +1,4 @@
+import { RiSearch2Line, RiSearchLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -5,7 +6,6 @@ import DrawSearch from "../DrawSearch";
 import { IoOptions } from "react-icons/io5";
 import MapDataRender from "../MapDataRender";
 import { PropsMainHome } from "./interfaces";
-import { RiSearchLine } from "react-icons/ri";
 import { RootState } from "~/redux/store";
 import TippyHeadless from "@tippyjs/react/headless";
 import dynamic from "next/dynamic";
@@ -81,7 +81,7 @@ function MainHome({}: PropsMainHome) {
           <div className={styles.menu}>
             <div className={styles.search}>
               <input
-                placeholder="Tìm kiếm..."
+                placeholder="Search..."
                 onChange={(e) => setKeyword(e.target.value)}
               />
               <div className={styles.icon}>
@@ -90,10 +90,10 @@ function MainHome({}: PropsMainHome) {
             </div>
 
             {debounce.trim() !== "" && list.length <= 0 ? (
-              <p className={styles.msg}>Không có dữ liệu!</p>
+              <p className={styles.msg}>No data!</p>
             ) : null}
             {debounce.trim() !== "" && list.length > 0 ? (
-              <p className={styles.msg}>Kết quả tìm kiếm: {list.length}</p>
+              <p className={styles.msg}>Search results: {list.length}</p>
             ) : null}
             {displayList.length > 0 ? (
               <div className={styles.list} ref={ref} onScroll={handleScroll}>
@@ -124,7 +124,7 @@ function MainHome({}: PropsMainHome) {
             setShowMenu(!showMenu);
           }}
         >
-          <IoOptions />
+          <RiSearch2Line />
         </div>
       </TippyHeadless>
       <DrawSearch />
