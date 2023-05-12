@@ -1,16 +1,16 @@
 import { RiSearch2Line, RiSearchLine } from "react-icons/ri";
+import { setCenterMap, setLayerFocus } from "~/redux/reducer/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import DrawSearch from "../DrawSearch";
-import { IoOptions } from "react-icons/io5";
-import MapDataRender from "../MapDataRender";
+import { LAYERS } from "~/constants/enum";
+import LayerPanel from "../LayerPanel";
 import { PropsMainHome } from "./interfaces";
 import { RootState } from "~/redux/store";
 import TippyHeadless from "@tippyjs/react/headless";
 import dynamic from "next/dynamic";
 import { removeVietnameseTones } from "~/common/func/optionConvert";
-import { setCenterMap } from "~/redux/reducer/user";
 import styles from "./MainHome.module.scss";
 import useDebounce from "~/common/hooks/useDebounce";
 
@@ -20,7 +20,9 @@ function MainHome({}: PropsMainHome) {
   const limit = 7;
   const ref = useRef<any>(null);
   const dispatch = useDispatch();
-  const { data } = useSelector((state: RootState) => state.user);
+  const { data, listDisplayLayer } = useSelector(
+    (state: RootState) => state.user
+  );
   const [displayList, setDisplayList] = useState<any>([]);
   const [keyword, setKeyword] = useState("");
   const [showMenu, setShowMenu] = useState(false);
@@ -33,20 +35,29 @@ function MainHome({}: PropsMainHome) {
       return [];
     }
 
-    const admindata = data.melbourneadmin.features.filter((x: any) =>
-      removeVietnameseTones(`${x?.properties?.LGA_NAME}`).includes(
-        removeVietnameseTones(debounce.trim())
-      )
-    );
+    const admindata = listDisplayLayer.includes(LAYERS.melbourneadmin)
+      ? data.melbourneadmin.features.filter((x: any) =>
+          removeVietnameseTones(`${x?.properties?.NAME}`).includes(
+            removeVietnameseTones(debounce.trim())
+          )
+        )
+      : [];
 
-    const roadsdata = data.roads.features.filter((x: any) =>
-      removeVietnameseTones(`${x?.properties?.local_name}`).includes(
-        removeVietnameseTones(debounce.trim())
-      )
-    );
+    const roadsdata = listDisplayLayer.includes(LAYERS.roads)
+      ? data.roads.features.filter((x: any) =>
+          removeVietnameseTones(`${x?.properties?.NAME}`).includes(
+            removeVietnameseTones(debounce.trim())
+          )
+        )
+      : [];
 
     return [...admindata, ...roadsdata];
-  }, [data.melbourneadmin.features, data.roads.features, debounce]);
+  }, [
+    data.melbourneadmin.features,
+    data.roads.features,
+    debounce,
+    listDisplayLayer,
+  ]);
 
   useEffect(() => {
     setPage(1);
@@ -102,20 +113,39 @@ function MainHome({}: PropsMainHome) {
                     className={styles.item}
                     key={i}
                     onClick={() => {
-                      // dispatch(setCenterMap([10.35527, 106.107159]));
-                      dispatch(
-                        setCenterMap([
-                          v.geometry.coordinates?.[0]?.[0]?.[0][1],
-                          v.geometry.coordinates?.[0]?.[0]?.[0][0],
-                        ])
-                      );
+                      dispatch(setLayerFocus(v));
+
+                      if (!!v.geometry.coordinates?.[0]?.[0]?.[0]?.[0])
+                        dispatch(
+                          setCenterMap([
+                            v.geometry.coordinates?.[0]?.[0]?.[0][1],
+                            v.geometry.coordinates?.[0]?.[0]?.[0][0],
+                          ])
+                        );
+                      else {
+                        if (!!v.geometry.coordinates?.[0]?.[0]?.[0])
+                          dispatch(
+                            setCenterMap([
+                              v.geometry.coordinates?.[0]?.[0][1],
+                              v.geometry.coordinates?.[0]?.[0][0],
+                            ])
+                          );
+                      }
                     }}
                   >
                     <p>
-                      Name: {v.properties?.LGA_NAME || v.properties?.local_name}
+                      Name: {v.properties?.NAME || v.properties?.local_name}
                     </p>
-                    <p>PFI: {v.properties?.PFI}</p>
-                    <p>UFI_CR: {v.properties?.UFI_CR}:</p>
+                    {v.properties?.PFI ? <p>PFI: {v.properties?.PFI}</p> : null}
+                    {v.properties?.GAZ_LGA ? (
+                      <p>GAZ_LGA: {v.properties?.GAZ_LGA}:</p>
+                    ) : null}
+                    {v.properties?.RD_TYPE ? (
+                      <p>RD_TYPE: {v.properties?.RD_TYPE}:</p>
+                    ) : null}
+                    {v.properties?.RD_NUM ? (
+                      <p>RD_NUM: {v.properties?.RD_NUM}:</p>
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -133,6 +163,7 @@ function MainHome({}: PropsMainHome) {
         </div>
       </TippyHeadless>
       <DrawSearch />
+      <LayerPanel />
       <MapClient />
     </div>
   );

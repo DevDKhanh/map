@@ -8,6 +8,7 @@ import { PropsDrawSearch } from "./interfaces";
 import { RootState } from "~/redux/store";
 import Tippy from "@tippyjs/react";
 import clsx from "clsx";
+import { memo } from "react";
 import styles from "./DrawSearch.module.scss";
 
 function DrawSearch({}: PropsDrawSearch) {
@@ -49,4 +50,4 @@ function DrawSearch({}: PropsDrawSearch) {
   );
 }
 
-export default DrawSearch;
+export default memo(DrawSearch);
