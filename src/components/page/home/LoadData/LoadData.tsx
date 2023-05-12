@@ -16,7 +16,18 @@ function LoadData({}: PropsLoadData) {
   const { data } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    dispatch(setData({ melbourneadmin, roads, vic_roads, vic_admin }));
+    dispatch(
+      setData({
+        melbourneadmin,
+        roads,
+        vic_roads:
+          vic_roads.StyledLayerDescriptor.NamedLayer.UserStyle.FeatureTypeStyle
+            .Rule,
+        vic_admin:
+          vic_admin.StyledLayerDescriptor.NamedLayer.UserStyle.FeatureTypeStyle
+            .Rule,
+      })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

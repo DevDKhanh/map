@@ -57,3 +57,32 @@
   min-width: 450px;
   padding: 24px;
 }
+
+.msg {
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.list {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+.item {
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+
+  & + & {
+    margin-top: 12px;
+  }
+
+  &:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+}

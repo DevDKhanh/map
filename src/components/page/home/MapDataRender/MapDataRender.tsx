@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 
 function MapDataRender({}: PropsMapDataRender) {
   const { data } = useSelector((state: RootState) => state.user);
-  console.log(data);
 
   return (
     <div>
-      {!!data?.roads ? <GeoJSON key={data.roads} data={data.roads} /> : null}
+      {!!data?.melbourneadmin ? (
+        <GeoJSON key={data.melbourneadmin} data={data.melbourneadmin} />
+      ) : null}
     </div>
   );
 }
