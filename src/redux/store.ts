@@ -9,7 +9,7 @@ import userReducer from "./reducer/user";
 const persistConfigUser = {
   key: "user",
   storage,
-  blacklist: ["data"],
+  blacklist: ["data", "center"],
 };
 
 const reducers = combineReducers({
