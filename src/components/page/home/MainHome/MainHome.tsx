@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import DrawSearch from "../DrawSearch";
 import { IoOptions } from "react-icons/io5";
 import MapDataRender from "../MapDataRender";
 import { PropsMainHome } from "./interfaces";
@@ -59,8 +60,6 @@ function MainHome({}: PropsMainHome) {
     ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, list]);
-
-  console.log(displayList);
 
   function handleScroll() {
     const div = ref.current;
@@ -128,6 +127,7 @@ function MainHome({}: PropsMainHome) {
           <IoOptions />
         </div>
       </TippyHeadless>
+      <DrawSearch />
       <MapClient />
     </div>
   );

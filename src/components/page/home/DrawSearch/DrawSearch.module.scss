@@ -1,0 +1,87 @@
+.option {
+  position: fixed;
+  z-index: 1000;
+  right: 80px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  &.active {
+    color: #0077ff;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.delete {
+  position: fixed;
+  z-index: 1000;
+  right: 130px;
+  top: 40px;
+  opacity: 0;
+  visibility: hidden;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: 0.3s;
+
+  &.active {
+    top: 20px;
+    opacity: 1;
+    visibility: inherit;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.back {
+  position: fixed;
+  z-index: 1000;
+  right: 180px;
+  top: 40px;
+  opacity: 0;
+  visibility: hidden;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: 0.3s;
+
+  &.active {
+    top: 20px;
+    opacity: 1;
+    visibility: inherit;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
