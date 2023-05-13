@@ -61,6 +61,8 @@ function Draw() {
 
   useMapEvents({
     click: (e) => {
+      console.log(e);
+
       if (isDraw)
         dispatch(setDrawSearch([...drawSearch, [e.latlng.lat, e.latlng.lng]]));
     },
@@ -75,7 +77,7 @@ function Draw() {
         if (event.ctrlKey && event.key === "z") {
           dispatch(setDrawSearch(drawSearch.slice(0, drawSearch.length - 1)));
         }
-        if (event.key === "Backspace") {
+        if (event.ctrlKey && event.key === "Backspace") {
           dispatch(setDrawSearch([]));
         }
       };
