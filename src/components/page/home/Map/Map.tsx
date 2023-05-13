@@ -28,6 +28,7 @@ function MapClient({}: PropsMap) {
         position: "absolute",
       }}
       crs={CRS.EPSG3857}
+      doubleClickZoom={false}
     >
       {displayType == TITLELAYER.Satellite ? (
         <TileLayer
@@ -62,6 +63,9 @@ function Draw() {
     click: (e) => {
       if (isDraw)
         dispatch(setDrawSearch([...drawSearch, [e.latlng.lat, e.latlng.lng]]));
+    },
+    dblclick: () => {
+      if (isDraw) dispatch(setDrawSearch([]));
     },
   });
 
