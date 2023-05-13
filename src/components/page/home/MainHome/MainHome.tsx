@@ -46,7 +46,7 @@ function MainHome({}: PropsMainHome) {
   const debounce = useDebounce(keyword, 500);
 
   useEffect(() => {
-    if (drawSearch.length >= 3) {
+    if (drawSearch.length >= 3 && isDraw) {
       setShowMenu(true);
       const search: any[] = [...swapArrayValues(drawSearch)];
       search.push(swapArrayValues(drawSearch)[0]);

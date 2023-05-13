@@ -1,33 +1,43 @@
 import { LAYERS, TITLELAYER } from "~/constants/enum";
 import { memo, useState } from "react";
-import { setDisplayLayer, setDisplayType } from "~/redux/reducer/user";
+import {
+  setBaseZoom,
+  setDisplayLayer,
+  setDisplayType,
+} from "~/redux/reducer/user";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FaLayerGroup } from "react-icons/fa";
 import { PropsLayerPanel } from "./interfaces";
+import { RiHome7Fill } from "react-icons/ri";
 import { RootState } from "~/redux/store";
+import Tippy from "@tippyjs/react/headless";
 import TippyHeadless from "@tippyjs/react/headless";
 import styles from "./LayerPanel.module.scss";
 
 const base = [
   {
     value: LAYERS.melbourneadmin,
-    title: "Melbourne Admin Layer",
+    title: "Melbourne Admin",
   },
   {
     value: LAYERS.roads,
-    title: "Roads Layer",
+    title: "Roads",
   },
 ];
 
 const layer = [
   {
     value: TITLELAYER.Terrain,
-    title: "Terrain",
+    title: "OpenStreetMap Terrain",
   },
   {
     value: TITLELAYER.Satellite,
-    title: "Satellite",
+    title: "MapTiler Satellite Images",
+  },
+  {
+    value: TITLELAYER.No,
+    title: "No background",
   },
 ];
 
@@ -60,7 +70,7 @@ function LayerPanel({}: PropsLayerPanel) {
         placement="bottom-end"
         render={(attrs) => (
           <div className={styles.menu}>
-            <p className={styles.title}>Layer type</p>
+            <p className={styles.title}>Basemap</p>
             {layer.map((v, i) => (
               <label className={styles.item} key={i}>
                 <input
@@ -99,6 +109,16 @@ function LayerPanel({}: PropsLayerPanel) {
           <FaLayerGroup />
         </div>
       </TippyHeadless>
+      <Tippy content="Return to the initial position">
+        <div
+          className={styles.home}
+          onClick={() =>
+            dispatch(setBaseZoom({ center: [-37.8201, 145.3443], zoom: 10 }))
+          }
+        >
+          <RiHome7Fill />
+        </div>
+      </Tippy>
     </div>
   );
 }

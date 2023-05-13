@@ -6,4 +6,5 @@ export enum LAYERS {
 export enum TITLELAYER {
   Satellite,
   Terrain,
+  No,
 }

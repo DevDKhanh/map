@@ -9,6 +9,7 @@ interface UserState {
   data: any;
   center: any;
   drawSearch: any[];
+  baseZoom: { center: any; zoom: number };
 }
 
 const initialState: UserState = {
@@ -19,6 +20,7 @@ const initialState: UserState = {
   listDisplayLayer: [LAYERS.melbourneadmin],
   displayType: TITLELAYER.Terrain,
   layerFocus: "",
+  baseZoom: { center: [-37.8201, 145.3443], zoom: 10 },
 };
 
 export const userSlice = createSlice({
@@ -46,6 +48,9 @@ export const userSlice = createSlice({
     setLayerFocus: (state, action: PayloadAction<any>) => {
       state.layerFocus = action?.payload;
     },
+    setBaseZoom: (state, action: PayloadAction<any>) => {
+      state.baseZoom = action?.payload;
+    },
   },
 });
 
@@ -58,5 +63,6 @@ export const {
   setIsDraw,
   setDisplayLayer,
   setLayerFocus,
+  setBaseZoom,
 } = userSlice.actions;
 export default userSlice.reducer;
