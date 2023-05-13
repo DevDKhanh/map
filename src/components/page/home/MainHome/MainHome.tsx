@@ -118,7 +118,7 @@ function MainHome({}: PropsMainHome) {
               )
             )
           : [];
-      return [...admindata, ...roadsdata];
+      return [...roadsdata, ...admindata];
     }
 
     const admindata = listDisplayLayer.includes(LAYERS.melbourneadmin)
@@ -137,7 +137,7 @@ function MainHome({}: PropsMainHome) {
         )
       : [];
 
-    return [...admindata, ...roadsdata];
+    return [...roadsdata, ...admindata];
   }, [
     data.melbourneadmin.features,
     data.roads.features,
