@@ -87,8 +87,13 @@ function MainHome({}: PropsMainHome) {
           roads: featuresWithin,
         }));
       }
+    } else {
+      setDataSearchDraw((prev: any) => ({
+        melbourneadmin: [],
+        roads: [],
+      }));
     }
-  }, [data.melbourneadmin, data?.roads, drawSearch, listDisplayLayer]);
+  }, [data.melbourneadmin, data.roads, drawSearch, isDraw, listDisplayLayer]);
 
   const list: any[] = useMemo(() => {
     if (debounce.trim() == "" && !isDraw) {
