@@ -27,6 +27,7 @@ const getInfo = (data: any) => {
 
 function MapDataRender({}: PropsMapDataRender) {
   const [reset, setReset] = useState(false);
+  const [resetAll, setResetAll] = useState(false);
   const { data, listDisplayLayer, layerFocus, isDraw } = useSelector(
     (state: RootState) => state.user
   );
@@ -97,8 +98,6 @@ function MapDataRender({}: PropsMapDataRender) {
         fillColor: style?.PolygonSymbolizer?.Fill?.SvgParameter,
       };
     };
-
-    setReset(false);
     return layerFocus ? (
       <GeoJSON
         data={layerFocus}
@@ -110,13 +109,10 @@ function MapDataRender({}: PropsMapDataRender) {
 
   const render = useMemo(() => {
     const handleEachInfo = (info: any, layer: any) => {
-      if (isDraw) {
-        layer.unbindPopup();
-        return;
-      } else {
-        const { properties } = info;
-        return layer.bindPopup(getInfo(properties).join(""));
-      }
+      if (isDraw) return;
+
+      const { properties } = info;
+      return layer.bindPopup(getInfo(properties).join(""));
     };
 
     return (
@@ -147,15 +143,29 @@ function MapDataRender({}: PropsMapDataRender) {
   ]);
 
   useEffect(() => {
-    if (!!layerFocus) {
+    setResetAll(false);
+  }, [isDraw]);
+
+  useEffect(() => {
+    if (!resetAll) {
+      setResetAll(true);
+    }
+  }, [resetAll]);
+
+  useEffect(() => {
+    setReset(false);
+  }, [layerFocus]);
+
+  useEffect(() => {
+    if (!reset) {
       setReset(true);
     }
-  }, [layerFocus, isDraw]);
+  }, [reset]);
 
   return (
     <Fragment>
       {reset ? focus : null}
-      {render}
+      {resetAll ? render : null}
     </Fragment>
   );
 }
