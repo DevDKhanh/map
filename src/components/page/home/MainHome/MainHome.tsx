@@ -12,6 +12,7 @@ import { PropsMainHome } from "./interfaces";
 import { RootState } from "~/redux/store";
 import TippyHeadless from "@tippyjs/react/headless";
 import clsx from "clsx";
+import { convertCoin } from "~/common/func/convertCoin";
 import dynamic from "next/dynamic";
 import { removeVietnameseTones } from "~/common/func/optionConvert";
 import styles from "./MainHome.module.scss";
@@ -194,7 +195,9 @@ function MainHome({}: PropsMainHome) {
               <p className={styles.msg}>No data!</p>
             ) : null}
             {list.length > 0 ? (
-              <p className={styles.msg}>Search results: {list.length}</p>
+              <p className={styles.msg}>
+                Search results: {convertCoin(list.length)} features found
+              </p>
             ) : null}
             {displayList.length > 0 ? (
               <div className={styles.list} ref={ref} onScroll={handleScroll}>
