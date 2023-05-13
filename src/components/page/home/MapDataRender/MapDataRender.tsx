@@ -33,18 +33,6 @@ function MapDataRender({}: PropsMapDataRender) {
 
   const map = useMapEvents({});
 
-  const handleEachInfo = useCallback(
-    (info: any, layer: any) => {
-      if (isDraw) {
-        return;
-      }
-
-      const { properties } = info;
-      layer.bindPopup(getInfo(properties).join(""));
-    },
-    [isDraw]
-  );
-
   const styleAdmin: any = useCallback(
     (info: any, layer: any) => {
       const { properties } = info;
@@ -80,18 +68,17 @@ function MapDataRender({}: PropsMapDataRender) {
   );
 
   const focus = useMemo(() => {
-    let a = null;
     const handleEachInfo = (info: any, layer: any) => {
-      if (isDraw) {
-        return;
-      }
-
       const bounds = layer.getBounds(); // Lấy giới hạn (bounds) của đối tượng
 
       if (bounds.isValid()) {
         if (map) {
           map.fitBounds(bounds); // Zoom vào giới hạn của đối tượng
         }
+      }
+
+      if (isDraw) {
+        return;
       }
 
       const { properties } = info;
@@ -119,9 +106,19 @@ function MapDataRender({}: PropsMapDataRender) {
         onEachFeature={handleEachInfo}
       />
     ) : null;
-  }, [data?.vic_admin, handleEachInfo, layerFocus]);
+  }, [data?.vic_admin, isDraw, layerFocus, map]);
 
   const render = useMemo(() => {
+    const handleEachInfo = (info: any, layer: any) => {
+      if (isDraw) {
+        layer.unbindPopup();
+        return;
+      } else {
+        const { properties } = info;
+        return layer.bindPopup(getInfo(properties).join(""));
+      }
+    };
+
     return (
       <Fragment>
         {listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
@@ -145,7 +142,6 @@ function MapDataRender({}: PropsMapDataRender) {
     data?.melbourneadmin,
     data?.roads,
     styleAdmin,
-    handleEachInfo,
     styleRoads,
     isDraw,
   ]);
