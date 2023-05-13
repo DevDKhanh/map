@@ -47,6 +47,7 @@ function MainHome({}: PropsMainHome) {
 
   useEffect(() => {
     if (drawSearch.length >= 3) {
+      setShowMenu(true);
       const search: any[] = [...swapArrayValues(drawSearch)];
       search.push(swapArrayValues(drawSearch)[0]);
 
