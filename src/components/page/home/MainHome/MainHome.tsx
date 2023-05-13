@@ -201,23 +201,8 @@ function MainHome({}: PropsMainHome) {
                     key={i}
                     onClick={() => {
                       dispatch(setLayerFocus(v));
-
-                      if (!!v.geometry.coordinates?.[0]?.[0]?.[0]?.[0])
-                        dispatch(
-                          setCenterMap([
-                            v.geometry.coordinates?.[0]?.[0]?.[0][1],
-                            v.geometry.coordinates?.[0]?.[0]?.[0][0],
-                          ])
-                        );
-                      else {
-                        if (!!v.geometry.coordinates?.[0]?.[0]?.[0])
-                          dispatch(
-                            setCenterMap([
-                              v.geometry.coordinates?.[0]?.[0][1],
-                              v.geometry.coordinates?.[0]?.[0][0],
-                            ])
-                          );
-                      }
+                      const point = turf.centroid(v).geometry.coordinates;
+                      dispatch(setCenterMap([point[1], point[0]]));
                     }}
                   >
                     <p>Name: {v.properties?.NAME}</p>

@@ -43,7 +43,7 @@ function MapClient({}: PropsMap) {
         />
       ) : null}
 
-      <LocationMarker center={center} zoom={10} />
+      {/* <LocationMarker center={center} zoom={10} /> */}
       {isDraw ? (
         <Fragment>
           <Draw />
@@ -61,8 +61,6 @@ function Draw() {
 
   useMapEvents({
     click: (e) => {
-      console.log(e);
-
       if (isDraw)
         dispatch(setDrawSearch([...drawSearch, [e.latlng.lat, e.latlng.lng]]));
     },
@@ -92,21 +90,17 @@ function Draw() {
   return null;
 }
 
-function LocationMarker({ center, zoom }: any) {
-  const map = useMapEvents({
-    locationfound(e) {
-      map.flyTo(e.latlng, map.getZoom());
-    },
-  });
+// function LocationMarker({ center, zoom }: any) {
+//   const map = useMapEvents({});
 
-  useEffect(() => {
-    if (center && zoom) {
-      map.flyTo(center, zoom);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [center, zoom]);
+//   useEffect(() => {
+//     if (center && zoom) {
+//       map.flyTo(center);
+//     }
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [center, zoom]);
 
-  return null;
-}
+//   return null;
+// }
 
 export default MapClient;

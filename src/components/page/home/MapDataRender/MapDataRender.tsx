@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { GeoJSON, useMap } from "react-leaflet";
+import { GeoJSON, useMap, useMapEvents } from "react-leaflet";
 
 import { LAYERS } from "~/constants/enum";
 import { PropsMapDataRender } from "./interfaces";
@@ -31,12 +31,19 @@ function MapDataRender({}: PropsMapDataRender) {
     (state: RootState) => state.user
   );
 
-  const handleEachInfo = (info: any, layer: any) => {
-    console.log("run");
+  const map = useMapEvents({});
 
-    const { properties } = info;
-    layer.bindPopup(getInfo(properties).join(""));
-  };
+  const handleEachInfo = useCallback(
+    (info: any, layer: any) => {
+      if (isDraw) {
+        return;
+      }
+
+      const { properties } = info;
+      layer.bindPopup(getInfo(properties).join(""));
+    },
+    [isDraw]
+  );
 
   const styleAdmin: any = useCallback(
     (info: any, layer: any) => {
@@ -73,6 +80,24 @@ function MapDataRender({}: PropsMapDataRender) {
   );
 
   const focus = useMemo(() => {
+    let a = null;
+    const handleEachInfo = (info: any, layer: any) => {
+      if (isDraw) {
+        return;
+      }
+
+      const bounds = layer.getBounds(); // Lấy giới hạn (bounds) của đối tượng
+
+      if (bounds.isValid()) {
+        if (map) {
+          map.fitBounds(bounds); // Zoom vào giới hạn của đối tượng
+        }
+      }
+
+      const { properties } = info;
+      layer.bindPopup(getInfo(properties).join(""));
+    };
+
     const handleStyleFocus: any = (info: any, layer: any) => {
       const { properties } = info;
       const style = data?.vic_admin.find((x: any) => x.Name == properties.NAME);
@@ -94,31 +119,47 @@ function MapDataRender({}: PropsMapDataRender) {
         onEachFeature={handleEachInfo}
       />
     ) : null;
-  }, [data?.vic_admin, layerFocus]);
+  }, [data?.vic_admin, handleEachInfo, layerFocus]);
+
+  const render = useMemo(() => {
+    return (
+      <Fragment>
+        {listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
+          <GeoJSON
+            data={data?.melbourneadmin}
+            style={styleAdmin}
+            onEachFeature={handleEachInfo}
+          />
+        ) : null}
+        {listDisplayLayer.includes(LAYERS.roads) ? (
+          <GeoJSON
+            data={data?.roads}
+            style={styleRoads}
+            onEachFeature={handleEachInfo}
+          />
+        ) : null}
+      </Fragment>
+    );
+  }, [
+    listDisplayLayer,
+    data?.melbourneadmin,
+    data?.roads,
+    styleAdmin,
+    handleEachInfo,
+    styleRoads,
+    isDraw,
+  ]);
 
   useEffect(() => {
     if (!!layerFocus) {
       setReset(true);
     }
-  }, [layerFocus]);
+  }, [layerFocus, isDraw]);
 
   return (
     <Fragment>
       {reset ? focus : null}
-      {listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
-        <GeoJSON
-          data={data?.melbourneadmin}
-          style={styleAdmin}
-          onEachFeature={handleEachInfo}
-        />
-      ) : null}
-      {listDisplayLayer.includes(LAYERS.roads) ? (
-        <GeoJSON
-          data={data?.roads}
-          style={styleRoads}
-          onEachFeature={handleEachInfo}
-        />
-      ) : null}
+      {render}
     </Fragment>
   );
 }
