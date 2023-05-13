@@ -17,27 +17,27 @@ import styles from "./LayerPanel.module.scss";
 
 const base = [
   {
-    value: LAYERS.melbourneadmin,
-    title: "Melbourne Admin",
-  },
-  {
     value: LAYERS.roads,
     title: "Roads",
+  },
+  {
+    value: LAYERS.melbourneadmin,
+    title: "Melbourne Admin",
   },
 ];
 
 const layer = [
   {
+    value: TITLELAYER.No,
+    title: "None",
+  },
+  {
     value: TITLELAYER.Terrain,
-    title: "OpenStreetMap Terrain",
+    title: "OpenStreet map",
   },
   {
     value: TITLELAYER.Satellite,
-    title: "MapTiler Satellite Images",
-  },
-  {
-    value: TITLELAYER.No,
-    title: "No background",
+    title: "Satellite",
   },
 ];
 
@@ -112,9 +112,9 @@ function LayerPanel({}: PropsLayerPanel) {
       <Tippy content="Return to the initial position">
         <div
           className={styles.home}
-          onClick={() =>
-            dispatch(setBaseZoom({ center: [-37.8201, 145.3443], zoom: 10 }))
-          }
+          onClick={() => {
+            dispatch(setBaseZoom({ center: [-37.8201, 145.3443], zoom: 10 }));
+          }}
         >
           <RiHome7Fill />
         </div>
