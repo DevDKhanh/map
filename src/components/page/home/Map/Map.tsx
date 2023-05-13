@@ -57,15 +57,26 @@ function MapClient({}: PropsMap) {
 
 function Draw() {
   const { drawSearch, isDraw } = useSelector((state: RootState) => state.user);
+  const [done, setDone] = useState(false);
   const dispatch = useDispatch();
 
   useMapEvents({
     click: (e) => {
-      if (isDraw)
-        dispatch(setDrawSearch([...drawSearch, [e.latlng.lat, e.latlng.lng]]));
+      if (isDraw) {
+        if (done) {
+          setDone(false);
+          dispatch(setDrawSearch([[e.latlng.lat, e.latlng.lng]]));
+        } else {
+          dispatch(
+            setDrawSearch([...drawSearch, [e.latlng.lat, e.latlng.lng]])
+          );
+        }
+      }
     },
     dblclick: () => {
-      if (isDraw) dispatch(setDrawSearch([]));
+      if (isDraw) {
+        setDone(true);
+      }
     },
   });
 

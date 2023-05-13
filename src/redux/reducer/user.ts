@@ -6,6 +6,7 @@ interface UserState {
   listDisplayLayer: any[];
   displayType: any;
   isDraw: boolean;
+  showDraw: boolean;
   data: any;
   center: any;
   drawSearch: any[];
@@ -17,6 +18,7 @@ const initialState: UserState = {
   center: [-37.8201, 145.3443],
   drawSearch: [],
   isDraw: false,
+  showDraw: false,
   listDisplayLayer: [LAYERS.melbourneadmin, LAYERS.roads],
   displayType: TITLELAYER.Terrain,
   layerFocus: "",
@@ -38,6 +40,9 @@ export const userSlice = createSlice({
     },
     setIsDraw: (state, action: PayloadAction<any>) => {
       state.isDraw = action?.payload;
+    },
+    setShowDraw: (state, action: PayloadAction<any>) => {
+      state.showDraw = action?.payload;
     },
     setDisplayLayer: (state, action: PayloadAction<any>) => {
       state.listDisplayLayer = action?.payload;
@@ -63,6 +68,7 @@ export const {
   setIsDraw,
   setDisplayLayer,
   setLayerFocus,
+  setShowDraw,
   setBaseZoom,
 } = userSlice.actions;
 export default userSlice.reducer;
