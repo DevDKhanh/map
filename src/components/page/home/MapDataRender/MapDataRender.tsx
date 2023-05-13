@@ -6,18 +6,37 @@ import {
   useMemo,
   useState,
 } from "react";
+import { GeoJSON, useMap } from "react-leaflet";
 
-import { GeoJSON } from "react-leaflet";
 import { LAYERS } from "~/constants/enum";
 import { PropsMapDataRender } from "./interfaces";
 import { RootState } from "~/redux/store";
 import { useSelector } from "react-redux";
 
+const getInfo = (data: any) => {
+  const info = [];
+  for (let i in data) {
+    info.push(`<div>
+              <p>
+                  <b>${i}: </b> ${data[i]}
+              </p>
+          </div>`);
+  }
+  return info;
+};
+
 function MapDataRender({}: PropsMapDataRender) {
   const [reset, setReset] = useState(false);
-  const { data, listDisplayLayer, layerFocus } = useSelector(
+  const { data, listDisplayLayer, layerFocus, isDraw } = useSelector(
     (state: RootState) => state.user
   );
+
+  const handleEachInfo = (info: any, layer: any) => {
+    console.log("run");
+
+    const { properties } = info;
+    layer.bindPopup(getInfo(properties).join(""));
+  };
 
   const styleAdmin: any = useCallback(
     (info: any, layer: any) => {
@@ -45,7 +64,7 @@ function MapDataRender({}: PropsMapDataRender) {
       return {
         color: style?.LineSymbolizer?.Stroke?.SvgParameter?.[0],
         opacity: 1,
-        weight: 1,
+        weight: 2,
         fillOpacity: 1,
         fillColor: style?.LineSymbolizer?.Stroke?.SvgParameter?.[0],
       };
@@ -69,7 +88,11 @@ function MapDataRender({}: PropsMapDataRender) {
 
     setReset(false);
     return layerFocus ? (
-      <GeoJSON data={layerFocus} style={handleStyleFocus} />
+      <GeoJSON
+        data={layerFocus}
+        style={handleStyleFocus}
+        onEachFeature={handleEachInfo}
+      />
     ) : null;
   }, [data?.vic_admin, layerFocus]);
 
@@ -83,10 +106,18 @@ function MapDataRender({}: PropsMapDataRender) {
     <Fragment>
       {reset ? focus : null}
       {listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
-        <GeoJSON data={data?.melbourneadmin} style={styleAdmin} />
+        <GeoJSON
+          data={data?.melbourneadmin}
+          style={styleAdmin}
+          onEachFeature={handleEachInfo}
+        />
       ) : null}
       {listDisplayLayer.includes(LAYERS.roads) ? (
-        <GeoJSON data={data?.roads} style={styleRoads} />
+        <GeoJSON
+          data={data?.roads}
+          style={styleRoads}
+          onEachFeature={handleEachInfo}
+        />
       ) : null}
     </Fragment>
   );

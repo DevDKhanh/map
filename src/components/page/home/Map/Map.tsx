@@ -9,10 +9,11 @@ import { CRS } from "leaflet";
 import MapDataRender from "../MapDataRender";
 import { PropsMap } from "./interfaces";
 import { RootState } from "~/redux/store";
+import { TITLELAYER } from "~/constants/enum";
 import { setDrawSearch } from "~/redux/reducer/user";
 
 function MapClient({}: PropsMap) {
-  const { center, drawSearch, isDraw } = useSelector(
+  const { center, drawSearch, isDraw, displayType } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -28,7 +29,19 @@ function MapClient({}: PropsMap) {
       }}
       crs={CRS.EPSG3857}
     >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      {displayType == TITLELAYER.Satellite ? (
+        <TileLayer
+          url="https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=jNwddzJMqBOxDXYZLWBp"
+          attribution="&copy; MapTiler"
+        />
+      ) : null}
+      {displayType == TITLELAYER.Terrain ? (
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap"
+        />
+      ) : null}
+
       <LocationMarker center={center} zoom={10} />
       {isDraw ? (
         <Fragment>
@@ -57,6 +70,9 @@ function Draw() {
       const handleKeyDown = (event: any) => {
         if (event.ctrlKey && event.key === "z") {
           dispatch(setDrawSearch(drawSearch.slice(0, drawSearch.length - 1)));
+        }
+        if (event.key === "Backspace") {
+          dispatch(setDrawSearch([]));
         }
       };
 

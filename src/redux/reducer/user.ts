@@ -1,10 +1,10 @@
+import { LAYERS, TITLELAYER } from "~/constants/enum";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-import { LAYERS } from "~/constants/enum";
 
 interface UserState {
   layerFocus: any;
   listDisplayLayer: any[];
+  displayType: any;
   isDraw: boolean;
   data: any;
   center: any;
@@ -17,6 +17,7 @@ const initialState: UserState = {
   drawSearch: [],
   isDraw: false,
   listDisplayLayer: [LAYERS.melbourneadmin],
+  displayType: TITLELAYER.Terrain,
   layerFocus: "",
 };
 
@@ -39,6 +40,9 @@ export const userSlice = createSlice({
     setDisplayLayer: (state, action: PayloadAction<any>) => {
       state.listDisplayLayer = action?.payload;
     },
+    setDisplayType: (state, action: PayloadAction<any>) => {
+      state.displayType = action?.payload;
+    },
     setLayerFocus: (state, action: PayloadAction<any>) => {
       state.layerFocus = action?.payload;
     },
@@ -48,6 +52,7 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setData,
+  setDisplayType,
   setCenterMap,
   setDrawSearch,
   setIsDraw,

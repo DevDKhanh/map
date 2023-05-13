@@ -136,6 +136,7 @@ function MainHome({}: PropsMainHome) {
     data.melbourneadmin.features,
     data.roads.features,
     dateSearchDraw.melbourneadmin,
+    dateSearchDraw.roads,
     debounce,
     isDraw,
     listDisplayLayer,
@@ -186,7 +187,7 @@ function MainHome({}: PropsMainHome) {
             {debounce.trim() !== "" && list.length <= 0 ? (
               <p className={styles.msg}>No data!</p>
             ) : null}
-            {debounce.trim() !== "" && list.length > 0 ? (
+            {list.length > 0 ? (
               <p className={styles.msg}>Search results: {list.length}</p>
             ) : null}
             {displayList.length > 0 ? (

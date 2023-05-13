@@ -1,12 +1,12 @@
+import { LAYERS, TITLELAYER } from "~/constants/enum";
 import { memo, useState } from "react";
+import { setDisplayLayer, setDisplayType } from "~/redux/reducer/user";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FaLayerGroup } from "react-icons/fa";
-import { LAYERS } from "~/constants/enum";
 import { PropsLayerPanel } from "./interfaces";
 import { RootState } from "~/redux/store";
 import TippyHeadless from "@tippyjs/react/headless";
-import { setDisplayLayer } from "~/redux/reducer/user";
 import styles from "./LayerPanel.module.scss";
 
 const base = [
@@ -20,9 +20,22 @@ const base = [
   },
 ];
 
+const layer = [
+  {
+    value: TITLELAYER.Terrain,
+    title: "Terrain",
+  },
+  {
+    value: TITLELAYER.Satellite,
+    title: "Satellite",
+  },
+];
+
 function LayerPanel({}: PropsLayerPanel) {
   const dispatch = useDispatch();
-  const { listDisplayLayer } = useSelector((state: RootState) => state.user);
+  const { listDisplayLayer, displayType } = useSelector(
+    (state: RootState) => state.user
+  );
   const [showMenu, setShowMenu] = useState(false);
 
   const handleDisplayLayer = (e: any, name: any) => {
@@ -34,6 +47,10 @@ function LayerPanel({}: PropsLayerPanel) {
     }
   };
 
+  const handleDisplayType = (e: any) => {
+    dispatch(setDisplayType(e.target.name));
+  };
+
   return (
     <div>
       <TippyHeadless
@@ -43,6 +60,19 @@ function LayerPanel({}: PropsLayerPanel) {
         placement="bottom-end"
         render={(attrs) => (
           <div className={styles.menu}>
+            <p className={styles.title}>Layer type</p>
+            {layer.map((v, i) => (
+              <label className={styles.item} key={i}>
+                <input
+                  type="radio"
+                  name={`${v.value}`}
+                  checked={displayType == v.value}
+                  onChange={handleDisplayType}
+                />
+                <p>{v.title}</p>
+              </label>
+            ))}
+            <br />
             <p className={styles.title}>Layers</p>
             {base.map((v, i) => (
               <label className={styles.item} key={i}>
