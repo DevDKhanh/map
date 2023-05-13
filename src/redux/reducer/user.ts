@@ -17,7 +17,7 @@ const initialState: UserState = {
   center: [-37.8201, 145.3443],
   drawSearch: [],
   isDraw: false,
-  listDisplayLayer: [LAYERS.melbourneadmin],
+  listDisplayLayer: [LAYERS.melbourneadmin, LAYERS.roads],
   displayType: TITLELAYER.Terrain,
   layerFocus: "",
   baseZoom: { center: [-37.8201, 145.3443], zoom: 10 },
