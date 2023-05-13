@@ -1,3 +1,5 @@
+import * as turf from "@turf/turf";
+
 import { RiSearch2Line, RiSearchLine } from "react-icons/ri";
 import { setCenterMap, setLayerFocus } from "~/redux/reducer/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +11,7 @@ import LayerPanel from "../LayerPanel";
 import { PropsMainHome } from "./interfaces";
 import { RootState } from "~/redux/store";
 import TippyHeadless from "@tippyjs/react/headless";
+import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { removeVietnameseTones } from "~/common/func/optionConvert";
 import styles from "./MainHome.module.scss";
@@ -16,23 +19,100 @@ import useDebounce from "~/common/hooks/useDebounce";
 
 const MapClient = dynamic(() => import("../Map"), { ssr: false });
 
+function swapArrayValues(arr: any[]) {
+  // Tạo mảng mới để chứa các phần tử đã được swap
+  const resultArray = [];
+
+  // Duyệt qua từng phần tử của mảng
+  for (let i = 0; i < arr.length; i++) {
+    // Swap giá trị của mỗi phần tử trong mảng con và thêm vào mảng mới
+    resultArray.push([arr[i][1], arr[i][0]]);
+  }
+
+  return resultArray;
+}
+
 function MainHome({}: PropsMainHome) {
   const limit = 7;
   const ref = useRef<any>(null);
   const dispatch = useDispatch();
-  const { data, listDisplayLayer } = useSelector(
-    (state: RootState) => state.user
-  );
+  const { data, listDisplayLayer, layerFocus, drawSearch, isDraw } =
+    useSelector((state: RootState) => state.user);
   const [displayList, setDisplayList] = useState<any>([]);
   const [keyword, setKeyword] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const [page, setPage] = useState(1);
-
+  const [dateSearchDraw, setDataSearchDraw] = useState<any>({});
   const debounce = useDebounce(keyword, 500);
 
+  useEffect(() => {
+    if (drawSearch.length >= 3) {
+      const search: any[] = [...swapArrayValues(drawSearch)];
+      search.push(swapArrayValues(drawSearch)[0]);
+
+      if (
+        data?.melbourneadmin &&
+        listDisplayLayer.includes(LAYERS.melbourneadmin)
+      ) {
+        const featureCollection: any = turf.featureCollection(
+          data.melbourneadmin.features
+        );
+        const polygon: any = turf.polygon([search]);
+        const featuresWithin = featureCollection.features.filter(
+          (feature: any) => {
+            const point = turf.pointOnFeature(feature);
+            return turf.booleanPointInPolygon(point, polygon);
+          }
+        );
+        setDataSearchDraw((prev: any) => ({
+          ...prev,
+          melbourneadmin: featuresWithin,
+        }));
+      }
+
+      if (data?.roads && listDisplayLayer.includes(LAYERS.roads)) {
+        const featureCollection: any = turf.featureCollection(
+          data.roads.features
+        );
+        const polygon: any = turf.polygon([search]);
+        const featuresWithin = featureCollection.features.filter(
+          (feature: any) => {
+            const point = turf.pointOnFeature(feature);
+            return turf.booleanPointInPolygon(point, polygon);
+          }
+        );
+        setDataSearchDraw((prev: any) => ({
+          ...prev,
+          roads: featuresWithin,
+        }));
+      }
+    }
+  }, [data.melbourneadmin, data?.roads, drawSearch, listDisplayLayer]);
+
   const list: any[] = useMemo(() => {
-    if (debounce.trim() == "") {
+    if (debounce.trim() == "" && !isDraw) {
       return [];
+    }
+
+    if (isDraw) {
+      const admindata =
+        dateSearchDraw?.melbourneadmin &&
+        listDisplayLayer.includes(LAYERS.melbourneadmin)
+          ? dateSearchDraw.melbourneadmin.filter((x: any) =>
+              removeVietnameseTones(`${x?.properties?.NAME}`).includes(
+                removeVietnameseTones(debounce.trim())
+              )
+            )
+          : [];
+      const roadsdata =
+        dateSearchDraw?.roads && listDisplayLayer.includes(LAYERS.roads)
+          ? dateSearchDraw.roads.filter((x: any) =>
+              removeVietnameseTones(`${x?.properties?.NAME}`).includes(
+                removeVietnameseTones(debounce.trim())
+              )
+            )
+          : [];
+      return [...admindata, ...roadsdata];
     }
 
     const admindata = listDisplayLayer.includes(LAYERS.melbourneadmin)
@@ -55,7 +135,9 @@ function MainHome({}: PropsMainHome) {
   }, [
     data.melbourneadmin.features,
     data.roads.features,
+    dateSearchDraw.melbourneadmin,
     debounce,
+    isDraw,
     listDisplayLayer,
   ]);
 
@@ -83,6 +165,7 @@ function MainHome({}: PropsMainHome) {
 
   return (
     <div className={styles.container}>
+      <MapClient />
       <TippyHeadless
         maxWidth={"100%"}
         interactive
@@ -110,7 +193,10 @@ function MainHome({}: PropsMainHome) {
               <div className={styles.list} ref={ref} onScroll={handleScroll}>
                 {displayList.map((v: any, i: number) => (
                   <div
-                    className={styles.item}
+                    className={clsx(styles.item, {
+                      [styles.active]:
+                        layerFocus?.properties?.NAME == v.properties.NAME,
+                    })}
                     key={i}
                     onClick={() => {
                       dispatch(setLayerFocus(v));
@@ -133,18 +219,16 @@ function MainHome({}: PropsMainHome) {
                       }
                     }}
                   >
-                    <p>
-                      Name: {v.properties?.NAME || v.properties?.local_name}
-                    </p>
+                    <p>Name: {v.properties?.NAME}</p>
                     {v.properties?.PFI ? <p>PFI: {v.properties?.PFI}</p> : null}
                     {v.properties?.GAZ_LGA ? (
-                      <p>GAZ_LGA: {v.properties?.GAZ_LGA}:</p>
+                      <p>GAZ_LGA: {v.properties?.GAZ_LGA}</p>
                     ) : null}
                     {v.properties?.RD_TYPE ? (
-                      <p>RD_TYPE: {v.properties?.RD_TYPE}:</p>
+                      <p>RD_TYPE: {v.properties?.RD_TYPE}</p>
                     ) : null}
                     {v.properties?.RD_NUM ? (
-                      <p>RD_NUM: {v.properties?.RD_NUM}:</p>
+                      <p>RD_NUM: {v.properties?.RD_NUM}</p>
                     ) : null}
                   </div>
                 ))}
@@ -164,7 +248,6 @@ function MainHome({}: PropsMainHome) {
       </TippyHeadless>
       <DrawSearch />
       <LayerPanel />
-      <MapClient />
     </div>
   );
 }

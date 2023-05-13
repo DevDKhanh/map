@@ -78,6 +78,11 @@
   user-select: none;
   font-weight: 500;
 
+  &.active {
+    border: 1px solid #0080ff !important;
+    background-color: #deedfd;
+  }
+
   & + & {
     margin-top: 12px;
   }

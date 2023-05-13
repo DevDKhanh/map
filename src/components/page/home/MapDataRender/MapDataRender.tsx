@@ -1,10 +1,16 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import {
+  Fragment,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { GeoJSON } from "react-leaflet";
 import { LAYERS } from "~/constants/enum";
 import { PropsMapDataRender } from "./interfaces";
 import { RootState } from "~/redux/store";
-import styles from "./MapDataRender.module.scss";
 import { useSelector } from "react-redux";
 
 function MapDataRender({}: PropsMapDataRender) {
@@ -13,10 +19,10 @@ function MapDataRender({}: PropsMapDataRender) {
     (state: RootState) => state.user
   );
 
-  const render = useMemo(() => {
-    const styleAdmin: any = (info: any, layer: any) => {
+  const styleAdmin: any = useCallback(
+    (info: any, layer: any) => {
       const { properties } = info;
-      const style = data.vic_admin.find((x: any) => x.Name == properties.NAME);
+      const style = data?.vic_admin.find((x: any) => x.Name == properties.NAME);
 
       return {
         color: style?.PolygonSymbolizer?.Fill?.SvgParameter,
@@ -25,10 +31,14 @@ function MapDataRender({}: PropsMapDataRender) {
         fillOpacity: 0.3,
         fillColor: "",
       };
-    };
-    const styleRoads: any = (info: any, layer: any) => {
+    },
+    [data?.vic_admin]
+  );
+
+  const styleRoads: any = useCallback(
+    (info: any, layer: any) => {
       const { properties } = info;
-      const style = data.vic_roads.find(
+      const style = data?.vic_roads.find(
         (x: any) => x.Name == properties.LOCAL_TYPE
       );
 
@@ -39,30 +49,14 @@ function MapDataRender({}: PropsMapDataRender) {
         fillOpacity: 1,
         fillColor: style?.LineSymbolizer?.Stroke?.SvgParameter?.[0],
       };
-    };
-    return (
-      <Fragment>
-        {!!data?.melbourneadmin &&
-        listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
-          <GeoJSON data={data.melbourneadmin} style={styleAdmin} />
-        ) : null}
-        {!!data?.roads && listDisplayLayer.includes(LAYERS.roads) ? (
-          <GeoJSON data={data.roads} style={styleRoads} />
-        ) : null}
-      </Fragment>
-    );
-  }, [
-    data.melbourneadmin,
-    data.roads,
-    data.vic_admin,
-    data.vic_roads,
-    listDisplayLayer,
-  ]);
+    },
+    [data?.vic_roads]
+  );
 
   const focus = useMemo(() => {
     const handleStyleFocus: any = (info: any, layer: any) => {
       const { properties } = info;
-      const style = data.vic_admin.find((x: any) => x.Name == properties.NAME);
+      const style = data?.vic_admin.find((x: any) => x.Name == properties.NAME);
 
       return {
         color: "blue",
@@ -77,7 +71,7 @@ function MapDataRender({}: PropsMapDataRender) {
     return layerFocus ? (
       <GeoJSON data={layerFocus} style={handleStyleFocus} />
     ) : null;
-  }, [data.vic_admin, layerFocus]);
+  }, [data?.vic_admin, layerFocus]);
 
   useEffect(() => {
     if (!!layerFocus) {
@@ -88,9 +82,14 @@ function MapDataRender({}: PropsMapDataRender) {
   return (
     <Fragment>
       {reset ? focus : null}
-      {render}
+      {listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
+        <GeoJSON data={data?.melbourneadmin} style={styleAdmin} />
+      ) : null}
+      {listDisplayLayer.includes(LAYERS.roads) ? (
+        <GeoJSON data={data?.roads} style={styleRoads} />
+      ) : null}
     </Fragment>
   );
 }
 
-export default MapDataRender;
+export default memo(MapDataRender);

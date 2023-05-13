@@ -25,8 +25,9 @@ function LayerPanel({}: PropsLayerPanel) {
   const { listDisplayLayer } = useSelector((state: RootState) => state.user);
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleDisplayLayer = (name: any) => {
-    if (listDisplayLayer.includes(name)) {
+  const handleDisplayLayer = (e: any, name: any) => {
+    const { checked } = e.target;
+    if (!checked) {
       dispatch(setDisplayLayer(listDisplayLayer.filter((x) => x != name)));
     } else {
       dispatch(setDisplayLayer([...listDisplayLayer, name]));
@@ -49,8 +50,8 @@ function LayerPanel({}: PropsLayerPanel) {
                   type="checkbox"
                   name={`${v.value}`}
                   checked={listDisplayLayer.includes(v.value)}
-                  onChange={() => {
-                    handleDisplayLayer(v.value);
+                  onChange={(e) => {
+                    handleDisplayLayer(e, v.value);
                   }}
                 />
                 <p>{v.title}</p>
