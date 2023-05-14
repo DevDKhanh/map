@@ -59,6 +59,7 @@ function MainHome({}: PropsMainHome) {
             const featureCollection: any = turf.featureCollection(
               element.features
             );
+
             const polygon: any = turf.polygon([search]);
             const featuresWithin = featureCollection.features.filter(
               (feature: any) => {
@@ -66,6 +67,7 @@ function MainHome({}: PropsMainHome) {
                 return turf.booleanPointInPolygon(point, polygon);
               }
             );
+
             setDataSearchDraw((prev: any) => ({
               ...prev,
               [key]: featuresWithin,
@@ -87,7 +89,6 @@ function MainHome({}: PropsMainHome) {
 
   const list: any[] = useMemo(() => {
     let result: any[] = [];
-
     if (debounce.trim() == "" && !isDraw) {
       return [];
     }
@@ -95,16 +96,19 @@ function MainHome({}: PropsMainHome) {
     if (isDraw) {
       for (const key in dateSearchDraw) {
         if (Object.prototype.hasOwnProperty.call(dateSearchDraw, key)) {
-          const element = data[key];
+          const element = dateSearchDraw[key];
+          console.log(element);
+
           const dataFind =
             listDisplayLayer.includes(Number(key)) &&
             dateSearchDraw[key].length > 0
-              ? element.features.filter((x: any) =>
+              ? element.filter((x: any) =>
                   removeVietnameseTones(`${x?.properties?.NAME}`).includes(
                     removeVietnameseTones(debounce.trim())
                   )
                 )
               : [];
+
           result = [...result, ...dataFind];
         }
       }
