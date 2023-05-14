@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import LoadData from "~/components/page/home/LoadData/LoadData";
 import MainHome from "~/components/page/home/MainHome/MainHome";
 import { RootState } from "~/redux/store";
 import styles from "~/styles/Home.module.scss";
@@ -11,8 +10,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <LoadData />
-      {data !== null ? <MainHome /> : null}
+      <MainHome />
     </div>
   );
 }

@@ -73,43 +73,6 @@ function MainHome({}: PropsMainHome) {
           }
         }
       }
-
-      // if (
-      //   data?.melbourneadmin &&
-      //   listDisplayLayer.includes(LAYERS.melbourneadmin)
-      // ) {
-      //   const featureCollection: any = turf.featureCollection(
-      //     data.melbourneadmin.features
-      //   );
-      //   const polygon: any = turf.polygon([search]);
-      //   const featuresWithin = featureCollection.features.filter(
-      //     (feature: any) => {
-      //       const point = turf.pointOnFeature(feature);
-      //       return turf.booleanPointInPolygon(point, polygon);
-      //     }
-      //   );
-      //   setDataSearchDraw((prev: any) => ({
-      //     ...prev,
-      //     melbourneadmin: featuresWithin,
-      //   }));
-      // }
-
-      // if (data?.roads && listDisplayLayer.includes(LAYERS.roads)) {
-      //   const featureCollection: any = turf.featureCollection(
-      //     data.roads.features
-      //   );
-      //   const polygon: any = turf.polygon([search]);
-      //   const featuresWithin = featureCollection.features.filter(
-      //     (feature: any) => {
-      //       const point = turf.pointOnFeature(feature);
-      //       return turf.booleanPointInPolygon(point, polygon);
-      //     }
-      //   );
-      //   setDataSearchDraw((prev: any) => ({
-      //     ...prev,
-      //     roads: featuresWithin,
-      //   }));
-      // }
     } else {
       for (const key in data) {
         if (Object.prototype.hasOwnProperty.call(data, key)) {
@@ -120,14 +83,7 @@ function MainHome({}: PropsMainHome) {
         }
       }
     }
-  }, [
-    data,
-    data.melbourneadmin,
-    data.roads,
-    drawSearch,
-    isDraw,
-    listDisplayLayer,
-  ]);
+  }, [data, drawSearch, isDraw, listDisplayLayer]);
 
   const list: any[] = useMemo(() => {
     let result: any[] = [];
