@@ -13,18 +13,8 @@ import { RiHome7Fill } from "react-icons/ri";
 import { RootState } from "~/redux/store";
 import Tippy from "@tippyjs/react/headless";
 import TippyHeadless from "@tippyjs/react/headless";
+import { listFile } from "~/constants";
 import styles from "./LayerPanel.module.scss";
-
-const base = [
-  {
-    value: LAYERS.roads,
-    title: "Roads",
-  },
-  {
-    value: LAYERS.melbourneadmin,
-    title: "Melbourne Admin",
-  },
-];
 
 const layer = [
   {
@@ -84,14 +74,14 @@ function LayerPanel({}: PropsLayerPanel) {
             ))}
             <br />
             <p className={styles.title}>Layers</p>
-            {base.map((v, i) => (
-              <label className={styles.item} key={i}>
+            {listFile.map((v) => (
+              <label className={styles.item} key={v.id}>
                 <input
                   type="checkbox"
-                  name={`${v.value}`}
-                  checked={listDisplayLayer.includes(v.value)}
+                  name={`${v.id}`}
+                  checked={listDisplayLayer.includes(v.id)}
                   onChange={(e) => {
-                    handleDisplayLayer(e, v.value);
+                    handleDisplayLayer(e, v.id);
                   }}
                 />
                 <p>{v.title}</p>

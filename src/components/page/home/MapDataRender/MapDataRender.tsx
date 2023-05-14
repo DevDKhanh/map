@@ -1,16 +1,12 @@
-import {
-  Fragment,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { GeoJSON, useMap, useMapEvents } from "react-leaflet";
+import { Fragment, memo, useEffect, useMemo, useState } from "react";
+import { GeoJSON, useMapEvents } from "react-leaflet";
 
-import { LAYERS } from "~/constants/enum";
+import L from "leaflet";
 import { PropsMapDataRender } from "./interfaces";
 import { RootState } from "~/redux/store";
+import Vector from "~/components/common/Layer/Vector";
+import axiosClient from "~/components/services";
+import { listFile } from "~/constants";
 import { useSelector } from "react-redux";
 
 const getInfo = (data: any) => {
@@ -28,119 +24,96 @@ const getInfo = (data: any) => {
 function MapDataRender({}: PropsMapDataRender) {
   const [reset, setReset] = useState(false);
   const [resetAll, setResetAll] = useState(false);
-  const { data, listDisplayLayer, layerFocus, isDraw } = useSelector(
+  const [colorFocus, setColorFocus] = useState<any>(null);
+  const { listDisplayLayer, layerFocus, isDraw } = useSelector(
     (state: RootState) => state.user
   );
 
   const map = useMapEvents({});
 
-  const styleAdmin: any = useCallback(
-    (info: any, layer: any) => {
-      const { properties } = info;
-      const style = data?.vic_admin.find((x: any) => x.Name == properties.NAME);
-
-      return {
-        color: style?.PolygonSymbolizer?.Fill?.SvgParameter,
-        opacity: "",
-        weight: 1,
-        fillOpacity: 0.3,
-        fillColor: "",
-      };
-    },
-    [data?.vic_admin]
-  );
-
-  const styleRoads: any = useCallback(
-    (info: any, layer: any) => {
-      const { properties } = info;
-      const style = data?.vic_roads.find(
-        (x: any) => x.Name == properties.LOCAL_TYPE
-      );
-
-      return {
-        color: style?.LineSymbolizer?.Stroke?.SvgParameter?.[0],
-        opacity: 1,
-        weight: 2,
-        fillOpacity: 1,
-        fillColor: style?.LineSymbolizer?.Stroke?.SvgParameter?.[0],
-      };
-    },
-    [data?.vic_roads]
-  );
-
   const focus = useMemo(() => {
-    const handleEachInfo = (info: any, layer: any) => {
-      const bounds = layer.getBounds(); // Lấy giới hạn (bounds) của đối tượng
+    if (layerFocus && colorFocus) {
+      const icon = new L.Icon({
+        iconUrl: `/Point-fc.png`,
+        iconSize: [26, 26],
+        popupAnchor: [0, -15],
+        shadowAnchor: [13, 28],
+      });
 
-      if (bounds.isValid()) {
-        if (map) {
-          map.fitBounds(bounds); // Zoom vào giới hạn của đối tượng
-        }
-      }
-
-      if (isDraw) {
-        return;
-      }
-
-      const { properties } = info;
-      layer.bindPopup(getInfo(properties).join(""));
-    };
-
-    const handleStyleFocus: any = (info: any, layer: any) => {
-      const { properties } = info;
-      const style = data?.vic_admin.find((x: any) => x.Name == properties.NAME);
-
-      return {
-        color: "blue",
-        opacity: 1,
-        weight: 3,
-        fillOpacity: 0.8,
-        fillColor: style?.PolygonSymbolizer?.Fill?.SvgParameter,
+      const handleCustomMarker = (feature: any, latlng: any) => {
+        return L.marker(latlng, {
+          icon,
+        });
       };
-    };
-    return layerFocus ? (
-      <GeoJSON
-        data={layerFocus}
-        style={handleStyleFocus}
-        onEachFeature={handleEachInfo}
-      />
-    ) : null;
-  }, [data?.vic_admin, isDraw, layerFocus, map]);
+
+      const handleEachInfo = (info: any, layer: any) => {
+        if (layer.feature.geometry.type == "Point") {
+          map.flyTo(
+            [
+              layer.feature.geometry.coordinates[1],
+              layer.feature.geometry.coordinates[0],
+            ],
+            18
+          );
+        } else {
+          const bounds = layer.getBounds(); // Lấy giới hạn (bounds) của đối tượng
+          if (bounds.isValid()) {
+            if (map) {
+              map.fitBounds(bounds); // Zoom vào giới hạn của đối tượng
+            }
+          }
+        }
+
+        if (isDraw) {
+          return;
+        }
+
+        const { properties } = info;
+        layer.bindPopup(getInfo(properties).join(""));
+      };
+
+      const handleStyleFocus: any = (info: any, layer: any) => {
+        const { properties } = info;
+        const style = colorFocus.find((x: any) => x.Name == properties.NAME);
+
+        return {
+          color: "red",
+          opacity: 1,
+          weight: 4,
+          fillOpacity: 0.8,
+          fillColor: style?.PolygonSymbolizer?.Fill?.SvgParameter,
+        };
+      };
+
+      return (
+        <GeoJSON
+          pointToLayer={handleCustomMarker}
+          data={layerFocus}
+          style={handleStyleFocus}
+          onEachFeature={handleEachInfo}
+        />
+      );
+    } else {
+      return null;
+    }
+  }, [colorFocus, isDraw, layerFocus, map]);
 
   const render = useMemo(() => {
-    const handleEachInfo = (info: any, layer: any) => {
-      if (isDraw) return;
-
-      const { properties } = info;
-      return layer.bindPopup(getInfo(properties).join(""));
-    };
-
-    return (
-      <Fragment>
-        {listDisplayLayer.includes(LAYERS.melbourneadmin) ? (
-          <GeoJSON
-            data={data?.melbourneadmin}
-            style={styleAdmin}
-            onEachFeature={handleEachInfo}
+    return listDisplayLayer.map((item) => {
+      const data = listFile.find((x) => x.id == item);
+      if (data)
+        return (
+          <Vector
+            key={data?.id}
+            path={data?.path}
+            pathColor={data?.pathColor}
+            type={data?.type}
+            id={data?.id}
           />
-        ) : null}
-        {listDisplayLayer.includes(LAYERS.roads) ? (
-          <GeoJSON
-            data={data?.roads}
-            style={styleRoads}
-            onEachFeature={handleEachInfo}
-          />
-        ) : null}
-      </Fragment>
-    );
-  }, [
-    listDisplayLayer,
-    data?.melbourneadmin,
-    data?.roads,
-    styleAdmin,
-    styleRoads,
-    isDraw,
-  ]);
+        );
+      else return null;
+    });
+  }, [listDisplayLayer]);
 
   useEffect(() => {
     setResetAll(false);
@@ -161,6 +134,15 @@ function MapDataRender({}: PropsMapDataRender) {
       setReset(true);
     }
   }, [reset]);
+
+  useEffect(() => {
+    (async () => {
+      const res: any = await axiosClient.get("/vic_admin.json");
+      setColorFocus(
+        res?.StyledLayerDescriptor.NamedLayer.UserStyle.FeatureTypeStyle?.Rule
+      );
+    })();
+  }, []);
 
   return (
     <Fragment>

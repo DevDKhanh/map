@@ -1,55 +1,78 @@
-export const listDayVN = ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"];
-export const listLearnTime = [
+import { LAYERS } from "./enum";
+
+export const listFile: {
+  path: string;
+  pathColor?: string;
+  type: string;
+  id: number;
+  title: string;
+}[] = [
   {
-    timeStart: "07:00",
-    timeEnd: "07:50",
+    path: "roads.json",
+    type: "MultiLineString",
+    id: LAYERS.roads,
+    title: "Roads",
+    pathColor: "vic_roads.json",
   },
   {
-    timeStart: "07:55",
-    timeEnd: "08:45",
+    path: "ptv_metro_bus_route.json",
+    type: "MultiLineString",
+    id: LAYERS.ptv_metro_bus_route,
+    title: "Metro bus route",
   },
   {
-    timeStart: "08:50",
-    timeEnd: "09:40",
+    path: "ptv_metro_bus_stop.json",
+    type: "Point",
+    id: LAYERS.ptv_metro_bus_stop,
+    title: "Metro bus stop",
   },
   {
-    timeStart: "09:55",
-    timeEnd: "10:45",
+    path: "ptv_metro_train_station.json",
+    type: "Point",
+    id: LAYERS.ptv_metro_train_station,
+    title: "Metro train station",
   },
   {
-    timeStart: "10:50",
-    timeEnd: "11:40",
+    path: "ptv_metro_tram_route.json",
+    type: "MultiLineString",
+    id: LAYERS.ptv_metro_tram_route,
+    title: "Metro tram route",
   },
   {
-    timeStart: "12:45",
-    timeEnd: "13:35",
+    path: "ptv_metro_tram_stop.json",
+    type: "Point",
+    id: LAYERS.ptv_metro_tram_stop,
+    title: "Metro tram stop",
   },
   {
-    timeStart: "13:40",
-    timeEnd: "14:30",
+    path: "ptv_regional_bus_route.json",
+    type: "MultiLineString",
+    id: LAYERS.ptv_regional_bus_route,
+    title: "Regional bus route",
   },
   {
-    timeStart: "14:35",
-    timeEnd: "15:25",
+    path: "ptv_regional_bus_stop.json",
+    type: "Point",
+    id: LAYERS.ptv_regional_bus_stop,
+    title: "Regional bus stop",
   },
   {
-    timeStart: "15:40",
-    timeEnd: "16:30",
+    path: "ptv_regional_train_station.json",
+    type: "Point",
+    id: LAYERS.ptv_regional_train_station,
+    title: "Regional train station",
   },
   {
-    timeStart: "16:35",
-    timeEnd: "17:25",
+    path: "ptv_train_station_platform.geojson",
+    type: "MultiPolygon",
+    id: LAYERS.ptv_train_station_platform,
+    title: "Train station platform",
   },
   {
-    timeStart: "18:00",
-    timeEnd: "18:50",
-  },
-  {
-    timeStart: "18:55",
-    timeEnd: "19:45",
-  },
-  {
-    timeStart: "19:50",
-    timeEnd: "20:40",
+    path: "melbourneadmin.json",
+    pathColor: "vic_admin.json",
+    type: "MultiPolygon",
+    id: LAYERS.melbourneadmin,
+    title: "Melbourne Admin",
   },
 ];

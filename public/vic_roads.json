@@ -1,0 +1,635 @@
+{
+  "StyledLayerDescriptor": {
+    "NamedLayer": {
+      "Name": "vicroads_roads",
+      "UserStyle": {
+        "Name": "vicroads_roads",
+        "FeatureTypeStyle": {
+          "Rule": [
+            {
+              "Name": "AVENUE",
+              "Description": {
+                "Title": "AVENUE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "AVENUE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#d2b97f",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "BOULEVARD",
+              "Description": {
+                "Title": "BOULEVARD"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "BOULEVARD"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#85e6e8",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "BYPASS",
+              "Description": {
+                "Title": "BYPASS"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "BYPASS"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#6724ca",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "CLOSE",
+              "Description": {
+                "Title": "CLOSE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "CLOSE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#a2dc45",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "COURT",
+              "Description": {
+                "Title": "COURT"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "COURT"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#7d9eec",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "CRESCENT",
+              "Description": {
+                "Title": "CRESCENT"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "CRESCENT"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#a4ed77",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "DRIVE",
+              "Description": {
+                "Title": "DRIVE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "DRIVE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#2ca2ca",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "ESPLANADE",
+              "Description": {
+                "Title": "ESPLANADE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "ESPLANADE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#e96bde",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "FREEWAY",
+              "Description": {
+                "Title": "FREEWAY"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "FREEWAY"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#cd69ad",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "GROVE",
+              "Description": {
+                "Title": "GROVE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "GROVE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#c98aed",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "HIGHWAY",
+              "Description": {
+                "Title": "HIGHWAY"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "HIGHWAY"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#729fc9",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "LANE",
+              "Description": {
+                "Title": "LANE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "LANE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#7880ef",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "LINK",
+              "Description": {
+                "Title": "LINK"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "LINK"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#3feec8",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "PARADE",
+              "Description": {
+                "Title": "PARADE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "PARADE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#48e19c",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "PLACE",
+              "Description": {
+                "Title": "PLACE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "PLACE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#e92a80",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "PROMENADE",
+              "Description": {
+                "Title": "PROMENADE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "PROMENADE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#ca884e",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "RAMP",
+              "Description": {
+                "Title": "RAMP"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "RAMP"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#14cb4b",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "RISE",
+              "Description": {
+                "Title": "RISE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "RISE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#7ae567",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "ROAD",
+              "Description": {
+                "Title": "ROAD"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "ROAD"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#c35bd5",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "STREET",
+              "Description": {
+                "Title": "STREET"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "STREET"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#8d7fd2",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "TERRACE",
+              "Description": {
+                "Title": "TERRACE"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "TERRACE"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#cf637a",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "TRACK",
+              "Description": {
+                "Title": "TRACK"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "TRACK"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#19ee2b",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "TRAIL",
+              "Description": {
+                "Title": "TRAIL"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "TRAIL"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#eee34d",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "TUNNEL",
+              "Description": {
+                "Title": "TUNNEL"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "TUNNEL"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#e46f6f",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "WAY",
+              "Description": {
+                "Title": "WAY"
+              },
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "WAY"
+                }
+              },
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#d05f3c",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "",
+              "Description": {
+                "Title": "local_type is ''"
+              },
+              "ElseFilter": "",
+              "LineSymbolizer": {
+                "Stroke": {
+                  "SvgParameter": [
+                    "#cad780",
+                    1,
+                    "bevel",
+                    "square"
+                  ]
+                }
+              }
+            },
+            {
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "STREET"
+                }
+              },
+              "TextSymbolizer": {
+                "Label": {
+                  "PropertyName": "rd_name"
+                },
+                "Font": {
+                  "SvgParameter": [
+                    "Open Sans",
+                    13
+                  ]
+                },
+                "LabelPlacement": {
+                  "LinePlacement": {
+                    "GeneralizeLine": true
+                  }
+                },
+                "Fill": {
+                  "SvgParameter": "#323232"
+                }
+              }
+            },
+            {
+              "Filter": {
+                "PropertyIsEqualTo": {
+                  "PropertyName": "local_type",
+                  "Literal": "ROAD"
+                }
+              },
+              "TextSymbolizer": {
+                "Label": {
+                  "PropertyName": "rd_name"
+                },
+                "Font": {
+                  "SvgParameter": [
+                    "Open Sans",
+                    13
+                  ]
+                },
+                "LabelPlacement": {
+                  "LinePlacement": {
+                    "GeneralizeLine": true
+                  }
+                },
+                "Fill": {
+                  "SvgParameter": "#323232"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

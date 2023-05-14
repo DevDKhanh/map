@@ -52,102 +52,125 @@ function MainHome({}: PropsMainHome) {
       const search: any[] = [...swapArrayValues(drawSearch)];
       search.push(swapArrayValues(drawSearch)[0]);
 
-      if (
-        data?.melbourneadmin &&
-        listDisplayLayer.includes(LAYERS.melbourneadmin)
-      ) {
-        const featureCollection: any = turf.featureCollection(
-          data.melbourneadmin.features
-        );
-        const polygon: any = turf.polygon([search]);
-        const featuresWithin = featureCollection.features.filter(
-          (feature: any) => {
-            const point = turf.pointOnFeature(feature);
-            return turf.booleanPointInPolygon(point, polygon);
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          if (listDisplayLayer.includes(Number(key))) {
+            const element = data[key];
+            const featureCollection: any = turf.featureCollection(
+              element.features
+            );
+            const polygon: any = turf.polygon([search]);
+            const featuresWithin = featureCollection.features.filter(
+              (feature: any) => {
+                const point = turf.pointOnFeature(feature);
+                return turf.booleanPointInPolygon(point, polygon);
+              }
+            );
+            setDataSearchDraw((prev: any) => ({
+              ...prev,
+              [key]: featuresWithin,
+            }));
           }
-        );
-        setDataSearchDraw((prev: any) => ({
-          ...prev,
-          melbourneadmin: featuresWithin,
-        }));
+        }
       }
 
-      if (data?.roads && listDisplayLayer.includes(LAYERS.roads)) {
-        const featureCollection: any = turf.featureCollection(
-          data.roads.features
-        );
-        const polygon: any = turf.polygon([search]);
-        const featuresWithin = featureCollection.features.filter(
-          (feature: any) => {
-            const point = turf.pointOnFeature(feature);
-            return turf.booleanPointInPolygon(point, polygon);
-          }
-        );
-        setDataSearchDraw((prev: any) => ({
-          ...prev,
-          roads: featuresWithin,
-        }));
-      }
+      // if (
+      //   data?.melbourneadmin &&
+      //   listDisplayLayer.includes(LAYERS.melbourneadmin)
+      // ) {
+      //   const featureCollection: any = turf.featureCollection(
+      //     data.melbourneadmin.features
+      //   );
+      //   const polygon: any = turf.polygon([search]);
+      //   const featuresWithin = featureCollection.features.filter(
+      //     (feature: any) => {
+      //       const point = turf.pointOnFeature(feature);
+      //       return turf.booleanPointInPolygon(point, polygon);
+      //     }
+      //   );
+      //   setDataSearchDraw((prev: any) => ({
+      //     ...prev,
+      //     melbourneadmin: featuresWithin,
+      //   }));
+      // }
+
+      // if (data?.roads && listDisplayLayer.includes(LAYERS.roads)) {
+      //   const featureCollection: any = turf.featureCollection(
+      //     data.roads.features
+      //   );
+      //   const polygon: any = turf.polygon([search]);
+      //   const featuresWithin = featureCollection.features.filter(
+      //     (feature: any) => {
+      //       const point = turf.pointOnFeature(feature);
+      //       return turf.booleanPointInPolygon(point, polygon);
+      //     }
+      //   );
+      //   setDataSearchDraw((prev: any) => ({
+      //     ...prev,
+      //     roads: featuresWithin,
+      //   }));
+      // }
     } else {
-      setDataSearchDraw((prev: any) => ({
-        melbourneadmin: [],
-        roads: [],
-      }));
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          setDataSearchDraw((prev: any) => ({
+            ...prev,
+            [key]: [],
+          }));
+        }
+      }
     }
-  }, [data.melbourneadmin, data.roads, drawSearch, isDraw, listDisplayLayer]);
+  }, [
+    data,
+    data.melbourneadmin,
+    data.roads,
+    drawSearch,
+    isDraw,
+    listDisplayLayer,
+  ]);
 
   const list: any[] = useMemo(() => {
+    let result: any[] = [];
+
     if (debounce.trim() == "" && !isDraw) {
       return [];
     }
 
     if (isDraw) {
-      const admindata =
-        dateSearchDraw?.melbourneadmin &&
-        listDisplayLayer.includes(LAYERS.melbourneadmin)
-          ? dateSearchDraw.melbourneadmin.filter((x: any) =>
-              removeVietnameseTones(`${x?.properties?.NAME}`).includes(
-                removeVietnameseTones(debounce.trim())
-              )
-            )
-          : [];
-      const roadsdata =
-        dateSearchDraw?.roads && listDisplayLayer.includes(LAYERS.roads)
-          ? dateSearchDraw.roads.filter((x: any) =>
-              removeVietnameseTones(`${x?.properties?.NAME}`).includes(
-                removeVietnameseTones(debounce.trim())
-              )
-            )
-          : [];
-      return [...roadsdata, ...admindata];
+      for (const key in dateSearchDraw) {
+        if (Object.prototype.hasOwnProperty.call(dateSearchDraw, key)) {
+          const element = data[key];
+          const dataFind =
+            listDisplayLayer.includes(Number(key)) &&
+            dateSearchDraw[key].length > 0
+              ? element.features.filter((x: any) =>
+                  removeVietnameseTones(`${x?.properties?.NAME}`).includes(
+                    removeVietnameseTones(debounce.trim())
+                  )
+                )
+              : [];
+          result = [...result, ...dataFind];
+        }
+      }
+      return result;
     }
 
-    const admindata = listDisplayLayer.includes(LAYERS.melbourneadmin)
-      ? data.melbourneadmin.features.filter((x: any) =>
-          removeVietnameseTones(`${x?.properties?.NAME}`).includes(
-            removeVietnameseTones(debounce.trim())
-          )
-        )
-      : [];
+    for (const key in data) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        const element = data[key];
+        const dataFind = listDisplayLayer.includes(Number(key))
+          ? element.features.filter((x: any) =>
+              removeVietnameseTones(`${x?.properties?.NAME}`).includes(
+                removeVietnameseTones(debounce.trim())
+              )
+            )
+          : [];
+        result = [...result, ...dataFind];
+      }
+    }
 
-    const roadsdata = listDisplayLayer.includes(LAYERS.roads)
-      ? data.roads.features.filter((x: any) =>
-          removeVietnameseTones(`${x?.properties?.NAME}`).includes(
-            removeVietnameseTones(debounce.trim())
-          )
-        )
-      : [];
-
-    return [...roadsdata, ...admindata];
-  }, [
-    data.melbourneadmin.features,
-    data.roads.features,
-    dateSearchDraw.melbourneadmin,
-    dateSearchDraw.roads,
-    debounce,
-    isDraw,
-    listDisplayLayer,
-  ]);
+    return result;
+  }, [data, dateSearchDraw, debounce, isDraw, listDisplayLayer]);
 
   useEffect(() => {
     setPage(1);

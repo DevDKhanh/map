@@ -7,7 +7,6 @@ import { RootState } from "~/redux/store";
 import melbourneadmin from "../../../../constants/data/melbourneadmin.json";
 import roads from "../../../../constants/data/roads.json";
 import { setData } from "~/redux/reducer/user";
-import styles from "./LoadData.module.scss";
 import vic_admin from "../../../../constants/data/vic_admin.json";
 import vic_roads from "../../../../constants/data/vic_roads.json";
 
@@ -18,14 +17,8 @@ function LoadData({}: PropsLoadData) {
   useEffect(() => {
     dispatch(
       setData({
-        melbourneadmin,
-        roads,
-        vic_roads:
-          vic_roads.StyledLayerDescriptor.NamedLayer.UserStyle.FeatureTypeStyle
-            .Rule,
-        vic_admin:
-          vic_admin.StyledLayerDescriptor.NamedLayer.UserStyle.FeatureTypeStyle
-            .Rule,
+        // melbourneadmin,
+        // roads,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
