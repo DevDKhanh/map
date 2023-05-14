@@ -97,7 +97,6 @@ function MainHome({}: PropsMainHome) {
       for (const key in dateSearchDraw) {
         if (Object.prototype.hasOwnProperty.call(dateSearchDraw, key)) {
           const element = dateSearchDraw[key];
-          console.log(element);
 
           const dataFind =
             listDisplayLayer.includes(Number(key)) &&
