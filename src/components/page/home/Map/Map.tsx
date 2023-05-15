@@ -32,7 +32,7 @@ function MapClient({}: PropsMap) {
     >
       {displayType == TITLELAYER.Satellite ? (
         <TileLayer
-          url="https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=jNwddzJMqBOxDXYZLWBp"
+          url="https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=PHwg3WaEcP48wFXo8LQR"
           attribution="&copy; MapTiler"
         />
       ) : null}
