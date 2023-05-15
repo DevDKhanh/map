@@ -34,7 +34,7 @@ function swapArrayValues(arr: any[]) {
 }
 
 function MainHome({}: PropsMainHome) {
-  const limit = 7;
+  const limit = 20;
   const ref = useRef<any>(null);
   const dispatch = useDispatch();
   const { data, listDisplayLayer, layerFocus, drawSearch, isDraw } =
