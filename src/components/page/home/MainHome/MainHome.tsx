@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import DrawSearch from "../DrawSearch";
+import { FaQuestion } from "react-icons/fa";
 import { LAYERS } from "~/constants/enum";
 import LayerPanel from "../LayerPanel";
+import Link from "next/link";
 import { PropsMainHome } from "./interfaces";
 import { RootState } from "~/redux/store";
+import Tippy from "@tippyjs/react/headless";
 import TippyHeadless from "@tippyjs/react/headless";
 import clsx from "clsx";
 import { convertCoin } from "~/common/func/convertCoin";
@@ -223,6 +226,9 @@ function MainHome({}: PropsMainHome) {
           <RiSearch2Line />
         </div>
       </TippyHeadless>
+      <Link href="/help.html" className={styles.help}>
+        <FaQuestion />
+      </Link>
       <DrawSearch />
       <LayerPanel />
     </div>
